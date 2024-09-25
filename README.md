@@ -1,7 +1,7 @@
-# aws-training
+***aws-training***
 For adding new AWS resources
 
-***S3 backends and State file locks in Terraform***
+# S3 backends and State file locks in Terraform
 1. Create the S3 bucket and Dynamodb manually. 
 
 S3 bucket 
@@ -20,7 +20,7 @@ File dependencies
 - main.tf
 - variables.tf
 
-***Other resources***
+# Other resources
 
 Files
 - dynamodb.tf
