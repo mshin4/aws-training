@@ -1,5 +1,5 @@
 resource "aws_eip" "elasticip" {
-  instance = aws_instance.ec2_ms.id
+  instance = aws_instance.web_ms.id
 }
 
 output "EIP" {

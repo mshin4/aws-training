@@ -22,3 +22,28 @@ resource "aws_vpc" "ms_vpc" {
 
 }
 
+module "ec2_instances" {
+  source = "./ec2"
+}
+
+module "ec2_instances2" {
+  source = "./counting"
+}
+
+#### Config driven import
+
+# for instance in ./ec2/ec2.tf
+# resource "aws_ebs_volume" "root_volume_web" {
+#   availability_zone = "us-east-1a"
+#   size              = 5
+# }
+
+# resource "aws_volume_attachment" "nonroot_ebs_att_web" {
+#   device_name = "/dev/xvdbz"
+#   volume_id   = aws_ebs_volume.root_volume_web.id
+#   instance_id =  aws_instance.web_ms.id
+# }
+
+
+# how to create multiple instances with different names
+# output each name using one block

@@ -1,25 +1,16 @@
 terraform {
   backend "s3" {
     key            = "terraform/tfstate.tfstate"
-    bucket         = "my-tf-bucket-ms4"
+    bucket         = "my-tf-bucket-ms6"
     encrypt        = true
     region         = "us-east-1"
     dynamodb_table = "db-lock-table"
   }
 }
 
-# when placed in parent folder, error below occurs
-
-# │ Error: Both a backend and Terraform Cloud configuration are present
-# │ 
-# │   on backend.tf line 2, in terraform:
-# │    2:   backend "s3" { 
-# │ 
-# │ A module may declare either one 'cloud' block configuring Terraform Cloud OR one 'backend' block configuring a state backend. Terraform Cloud is configured at main.tf:2,3-8; a backend is configured
-# │ at backend.tf:2,3-15. Remove the backend block to configure Terraform Cloud.
-
-# comment out backend w/o dynamodb_table attribute
-# terraform init, yes
-# commend out backend including dynamodb_table attribute
-# terraform init -migrate-state
-# terraform plan -lock=false
+# Setting up s3 state file lock using Dyanamodb table
+# Below steps are for sandbox environment that get periodically destroyed and the state file no longer applies
+# 1. manually create the s3 bucket and dynamodb table; use the names indicated above in backend.tf file; it helps to change the name of the bucket each time
+# 2. delete local terraform plugin files
+# 3. aws configure; provide latest credentials
+# 4. terraform init, plan, apply --auto-approve
